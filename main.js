@@ -1,45 +1,58 @@
-var nextBtn = document.getElementById("nextButton");
-var preBtn = document.getElementById("preButton");
-var slider = document.getElementById("slider");
+
 //change value slider width id you want  
-var widthItem = document.querySelector(".item").offsetWidth;
-var numItem = slider.querySelectorAll(".item").length;
+
 /* - Count how many Element in slider
 ** - And get width of item **
 */
-var currentPosition = 0;
-console.log(currentPosition)
+
+
 //preBtn.disabled = true;
 
-var widthSlider = numItem * widthItem;
-console.log(widthSlider)
+
+let DOM = new Object();
 //var distantSlide = "translate("+ (currentPosition) + "px)";
 //slider.style.transform = distantSlide;
 
-nextBtn.addEventListener("click",nextSlider);
-preBtn.addEventListener("click",backSlider);
+const init = function zyye(options) {
+    catchDOM(options);
+}
+const catchDOM = function variable(options) {
+    const widthI =  parseInt(document.querySelector(".item").offsetWidth);
+    const numI = parseInt(slider.querySelectorAll(".item").length)
+    DOM = {
+        main:document.getElementById("main"),
+        slider : document.getElementById(options.slider),
+        widthItem : widthI,
+        numItem :numI ,
+        currentPosition : 0,
+        widthSlider : widthI * numI,
+    }
+    createClone(DOM);
+    createArrow(options);
+   
 
+}
+
+const addEventsListener = function addEventsListener() {
+    DOM.nextBtn.addEventListener("click",nextSlider);
+    DOM.preBtn.addEventListener("click",backSlider);
+}
 function nextSlider(){
-  
-    currentPosition -= widthItem;
-    checkPosition(currentPosition);
+    DOM.currentPosition -= DOM.widthItem;
+    checkPosition(DOM.currentPosition);
 }
 
 function backSlider(){
-   
-
-   
-    currentPosition += widthItem;
-    console.log("click back " + parseInt(currentPosition));
-    checkPosition(currentPosition); 
-    
+    DOM.currentPosition += DOM.widthItem;
+    // console.log("click back " + parseInt(DOM.currentPosition));
+    checkPosition(DOM.currentPosition); 
 }
 
 //translate
 function checkPosition(newValue) {
-    distantSlide = "translate("+ (currentPosition) + "px)";
-    slider.style.transform = distantSlide;
-    console.log(currentPosition);
+    distantSlide = "translate("+ (DOM.currentPosition) + "px)";
+    DOM.slider.style.transform = distantSlide;
+    // console.log(DOM.currentPosition);
     //check first of slider disable button back
     
     // if(currentPosition == 0) {
@@ -55,29 +68,35 @@ function checkPosition(newValue) {
     // }
     // loop slider
 
-   if(currentPosition == -(widthItem*(numItem -2)))  {
+   if(DOM.currentPosition == -(DOM.widthItem*(DOM.numItem -2)))  {
         // currentPosition = 0;
         // console.log("this is current position" +currentPosition)
-        slider.style.transform = "translateX(" + currentPosition + "px)";   
+        DOM.slider.style.transform = "translateX(" + DOM.currentPosition + "px)";   
         setTimeout(function(){
-            slider.style.transition = "0s";
-            currentPosition = 0;
-            slider.style.transform = "translateX(" + currentPosition + "px)"; 
-        }, 600);
+            DOM.slider.style.transition = "0s";
+            DOM.currentPosition = 0;
+            DOM.slider.style.transform = "translateX(" + DOM.currentPosition + "px)"; 
+        }, 400);
     }else {
-        slider.style.transition = "0.5s";
+        DOM.slider.style.transition = "0.5s";
     }
-    if(currentPosition == widthItem) {
-        console.log(currentPosition)
-        slider.style.transform = "translateX(" + currentPosition + "px)";
+    if(DOM.currentPosition == DOM.widthItem) {
+        console.log(DOM.currentPosition)
+        DOM.slider.style.transform = "translateX(" + DOM.currentPosition + "px)";
         setTimeout(function(){
-            slider.style.transition = "0s";
-            currentPosition = -(widthItem*(numItem -3));
-            slider.style.transform = "translateX(" + currentPosition + "px)"; 
-        }, 600);
+            DOM.slider.style.transition = "0s";
+            DOM.currentPosition = -(DOM.widthItem*(DOM.numItem -3));
+            DOM.slider.style.transform = "translateX(" + DOM.currentPosition + "px)"; 
+        }, 400);
     }
     else {
-        slider.style.transition = "0.5s";
+        DOM.slider.style.transition = "0.5s";
     }
-   
 }
+// catchDOM();
+init({
+    slider:"slider",
+    nextBtn:"nextButton",
+    preBtn:"preButton",
+    dots:true
+})
