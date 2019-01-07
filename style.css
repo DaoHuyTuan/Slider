@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box; 
+}
+#main {
+    width:600px;
+    height:300px;
+    overflow:hidden;
+    position:relative;
+}
+#slider {
+    width:4000px;
+    height:300px;
+    display:flex;
+    overflow:hidden;
+    position: absolute;
+    transition: 0.5s;
+    /* transform:translateX(-600px); */
+    left:-600px;
+}
+.item {
+    width:600px;
+    height:300px;
+    display:inline-block;
+    background-color:red;
+}
+.btn {
+    outline: transparent;
+}
+#preButton {
+    width:20px;
+    height:20px;
+    border-radius:100%;
+    position:absolute;
+    top:130px;
+    left:20px;
+    background-color:#eeeded;
+    z-index:1;
+    cursor:pointer;
+    
+}
+#preButton:after {
+    content:"";
+    width:50%;
+    height:50%;
+    background-image: url("./left.svg");
+    display: block;
+    position: absolute;
+    top:5px;
+    left:5px;
+}
+#nextButton {
+    width:20px;
+    height:20px;
+    border-radius:100%;
+    position:absolute;
+    background-color:#eeeded;
+    z-index:1;
+    bottom:150px;
+    right:20px;
+    cursor:pointer;
+    
+}
+#nextButton:after {
+    content:"";
+    background-image: url("./right.svg");
+    width:50%;
+    height:50%;
+    display: block;
+    position: absolute;
+    top:5px;
+    left:5px;
+}
+.red {
+    background-color:red;
+}
+.blue {
+    background-color:blue;
+}
+.yellow {
+    background-color:yellow;
+}
+.pink {
+    background-color:pink;
+}
